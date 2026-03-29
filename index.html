@@ -1,174 +1,94 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta name="description" content="Mr.1000が贈る究極の診断ポータル。マイクラ診断、サイコパス診断、勇者適性診断など、あなたの隠れた才能をハッキングして暴き出します。">
-<meta name="keywords" content="診断, 診断サイト, Mr.1000, マイクラ診断, サイコパス診断, 勇者適性診断, おもしろ診断">
-<meta name="author" content="Mr.1000">
-
-<meta property="og:title" content="Mr.1000 | 究極の診断ポータルサイト">
-<meta property="og:description" content="君の正体を暴く準備はできているか？最新の診断コンテンツが集結。">
-<meta property="og:site_name" content="Mr.1000 PORTAL">
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mr.1000 PORTAL</title>
+    <title>Diag. | 診断ポータル</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #000;
-            color: white;
-            font-family: 'Hiragino Kaku Gothic ProN', sans-serif;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;}
-        
-        /* マトリックス背景 */
-        #matrix {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+        /* 清潔感のあるアプリ風デザイン */
+        :root { --main: #007aff; --bg: #f2f2f7; }
+        body { margin: 0; background: var(--bg); color: #1c1c1e; font-family: sans-serif; }
+        header { background: #fff; padding: 15px; border-bottom: 1px solid #d1d1d6; text-align: center; position: sticky; top: 0; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--main); }
+        .container { max-width: 500px; margin: 0 auto; padding: 15px; }
 
-        h1 {
-            margin-top: 50px;
-            font-size: 3rem;
-            color: #fff;
-            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
-            letter-spacing: 10px;
-            font-weight: bold;
-        }
-
-        .subtitle {
-            color: #0f0;
-            font-size: 1rem;
-            margin-bottom: 40px;
-            letter-spacing: 2px;
-            background: rgba(0,0,0,0.5);
-            padding: 5px 15px;
-            border-radius: 5px;
-        }
-
-        .menu-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            padding: 20px;
-            max-width: 1000px;
-        }
-
-        /* ガラス風リッチカード */
+        /* 診断リスト */
         .card {
-            background: rgba(255, 255, 255, 0.07);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            width: 280px;
-            padding: 30px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.4s ease;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            background: #fff; border-radius: 12px; padding: 15px; margin-bottom: 12px;
+            display: flex; align-items: center; cursor: pointer; border: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: 0.1s;
         }
+        .card:active { transform: scale(0.97); background: #f9f9f9; }
+        .icon { width: 60px; height: 60px; background: #e5e5ea; border-radius: 10px; margin-right: 15px; font-size: 1.8rem; display: flex; align-items: center; justify-content: center; }
+        .info h2 { margin: 0; font-size: 1rem; }
+        .info p { margin: 4px 0 0; font-size: 0.8rem; color: #8e8e93; }
+        .hot { display: inline-block; background: #ff3b30; color: #fff; font-size: 0.6rem; padding: 2px 6px; border-radius: 4px; margin-top: 5px; font-weight: bold; }
 
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: #0f0;
-            background: rgba(0, 255, 0, 0.1);
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 10px;
-            font-weight: bold;
-            background: #0f0;
-            color: #000;
-            margin-bottom: 15px;
-        }
-
-        h2 { margin: 10px 0; font-size: 24px; color: #fff; }
-        p { font-size: 14px; color: #ddd; line-height: 1.6; }
-
-        /* 次を待て用 */
-        .coming-soon {
-            opacity: 0.4;
-            filter: grayscale(1);
-            cursor: default;
-        }
+        /* 診断中画面 */
+        #quiz { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; flex-direction: column; padding: 40px 20px; box-sizing: border-box; text-align: center; }
+        .q-text { font-size: 1.4rem; font-weight: bold; margin: 40px 0; }
+        .btns { display: flex; flex-direction: column; gap: 10px; width: 100%; }
+        .btn { padding: 18px; border-radius: 12px; border: none; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
+        .yes { background: var(--main); color: #fff; }
+        .no { background: #e5e5ea; color: #000; }
     </style>
 </head>
 <body>
 
-    <canvas id="matrix"></canvas>
+<header><div class="logo">Diag.</div></header>
 
-    <h1>Mr.1000</h1>
-    <p class="subtitle">Next Generation Content Hub</p>
-
-    <div class="menu-container">
-
-        <a href="https://seniiichikuun.github.io/minecraft-shindan/" class="card">
-            <span class="badge">MISSION 01</span>
-            <h2>Minecraft Style</h2>
-            <p>君のプレイスタイルを精密に分析する、至高の診断ツール。</p>
-        </a>
-
-        <a href="https://seniiichikuun.github.io/psycho-test/" class="card">
-            <span class="badge" style="background: #ff416c; color: white;">MISSION 02</span>
-            <h2>Psychopath Test</h2>
-            <p>深層心理に隠された「真の顔」を暴く。閲覧注意の体験を。</p>
-        </a>
-
-        <a href="https://seniiichikuun.github.io/hero-test/" class="card">
-            <span class="badge" style="background: #4a90e2; color: white;">MISSION 03</span>
-            <h2>Hero Style</h2>
-            <p>君がファンタジーの世界に行ったら？隠れた勇者の才能を診断！</p>
-        </a>
-
-        <div class="card coming-soon">
-            <span class="badge" style="background: #555; color: white;">NEXT PROJECT</span>
-            <h2>次を待て...</h2>
-            <p>新プロジェクト極秘進行中。アップデートをお楽しみに！</p>
+<div class="container">
+    <div class="card" onclick="start('zense')">
+        <div class="icon">🧞‍♂️</div>
+        <div class="info">
+            <h2>あなたの「前世タイプ」診断！！</h2>
+            <p>性格から魂のルーツを特定。</p>
+            <span class="hot">人気 🔥</span>
         </div>
-
     </div>
+    <div class="card" onclick="start('tsun')">
+        <div class="icon">🎀</div>
+        <div class="info">
+            <h2>ツンデレ比率診断</h2>
+            <p>素直になれない心の割合を数値化。</p>
+        </div>
+    </div>
+</div>
 
-    <script>
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.height = window.innerHeight;
-        canvas.width = window.innerWidth;
-        const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const charArray = chars.split("");
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-        for (let x = 0; x < columns; x++) drops[x] = 1;
+<div id="quiz">
+    <div id="q-num" style="color: var(--main); font-weight: bold;">Q.1</div>
+    <div id="q-text" class="q-text">質問</div>
+    <div class="btns">
+        <button class="btn yes" onclick="answer(true)">はい</button>
+        <button class="btn no" onclick="answer(false)">いいえ</button>
+    </div>
+</div>
 
-        function draw() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0F0";
-            ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = charArray[Math.floor(Math.random() * charArray.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
+<script>
+    const data = {
+        zense: { q: ["直感を信じる？", "一人が好き？", "歴史が好き？", "運が良い方？", "冒険したい？"] },
+        tsun: { q: ["褒められると照れる？", "素直になれない？", "実は甘えん坊？", "怒りっぽい？", "ギャップがある？"] }
+    };
+    let cur = null, step = 0, score = 0;
+    function start(t) {
+        cur = data[t]; step = 0; score = 0;
+        document.getElementById('quiz').style.display = 'flex';
+        render();
+    }
+    function render() {
+        document.getElementById('q-num').innerText = "Q." + (step + 1);
+        document.getElementById('q-text').innerText = cur.q[step];
+    }
+    function answer(v) {
+        if(v) score++;
+        step++;
+        if(step < 5) render();
+        else {
+            alert("診断結果: タイプ" + score + "\n詳細ロジックは作成中です！");
+            document.getElementById('quiz').style.display = 'none';
         }
-        setInterval(draw, 33);
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-    </script>
+    }
+</script>
+
 </body>
 </html>
