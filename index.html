@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta name="description" content="Diag.Lab - あなたの将来のモテ期や前世をAIが精密診断。SNSで話題の恋愛診断ポータルサイト。">
-<meta name="keywords" content="診断, 恋愛診断, モテ期, 前世診断, ツンデレ診断, Diag.Lab">
-<meta property="og:title" content="Diag.Lab | 究極の診断ポータル">
-<meta property="og:description" content="一生で何人に告白されるか、あなたの運命を今すぐチェック！">
-<meta property="og:image" content="1774787133599.png"> <meta name="robots" content="index, follow">
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diag. | 診断ポータル</title>
+    <meta name="description" content="Diag.Lab - あなたの将来のモテ期や前世をAIが精密診断。SNSで話題の恋愛診断ポータルサイト。">
+    <meta name="keywords" content="診断, 恋愛診断, モテ期, 前世診断, ツンデレ診断, Diag.Lab">
+    <meta property="og:title" content="Diag.Lab | 究極の診断ポータル">
+    <meta property="og:description" content="一生で何人に告白されるか、あなたの運命を今すぐチェック！">
+    <meta property="robots" content="index, follow">
+    <title>Diag.Lab | 究極の診断ポータル</title>
     <style>
-        :root { --main: #ff4d79; --bg: #fdf2f5; } /* 恋愛系に合わせて少しピンク系の白に */
+        /* メインカラーを青に変更 */
+        :root { --main: #007aff; --bg: #fdf2f5; } 
         body { margin: 0; padding: 0; background: var(--bg); color: #1c1c1e; font-family: sans-serif; -webkit-tap-highlight-color: transparent; }
-        header { background: #fff; padding: 15px; border-bottom: 1px solid #eee; text-align: center; position: sticky; top: 0; z-index: 10; }
-        .logo { font-size: 1.5rem; font-weight: 900; color: var(--main); }
-        .container { max-width: 500px; margin: 0 auto; padding: 15px; }
+        
+        /* 【ここを修正】ヘッダーを青く、ロゴを白く */
+        header { background: var(--main); padding: 15px; border-bottom: 1px solid #eee; text-align: center; position: sticky; top: 0; z-index: 10; }
+        .logo { font-size: 1.5rem; font-weight: 900; color: #fff; } /* 文字を白 */
+        
+        .container { max-width: 500px; margin: 0 auto; padding: 0 15px 15px; }
 
+        /* カードデザイン */
         .card {
             background: #fff; border-radius: 16px; margin-bottom: 16px;
             display: flex; align-items: center; cursor: pointer; border: none;
@@ -27,7 +31,7 @@
         .info { flex: 1; padding: 10px; }
         .info h2 { margin: 0; font-size: 1rem; font-weight: bold; }
         .info p { margin: 4px 0 0; font-size: 0.75rem; color: #8e8e93; }
-        .hot { display: inline-block; background: #ff4d79; color: #fff; font-size: 0.6rem; padding: 2px 8px; border-radius: 10px; margin-top: 5px; font-weight: bold; }
+        .hot { display: inline-block; background: var(--main); color: #fff; font-size: 0.6rem; padding: 2px 8px; border-radius: 10px; margin-top: 5px; font-weight: bold; }
 
         /* 診断画面 */
         #quiz-ui { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 100; flex-direction: column; padding: 20px; box-sizing: border-box; }
@@ -49,9 +53,15 @@
 
 <header><div class="logo">Diag.Lab</div></header>
 
+<div style="background: var(--main); padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; margin-bottom: 15px;">
+    <p style="font-size: 0.9rem; color: #fff; line-height: 1.7; max-width: 420px; margin: 0 auto; text-align: left;">
+        国内最大級の精密診断サイトを目指すDiag.Labへようこそ。いろいろな質問で、あなたの未来やルーツを詳細に分析します。スキマ時間の暇つぶしや、自分磨きの参考にどうぞ！
+    </p>
+</div>
+
 <div class="container">
     <div class="card" onclick="startQuiz('love')">
-        <img src="1774857935465~2.png" alt="告白診断" class="card-img">
+        <img src="1774857935465~2.png" alt="告白" class="card-img">
         <div class="info">
             <h2>一生で何人に告白されるか診断</h2>
             <p>あなたの潜在的な魅力を数値化。未来のモテ期を予言します。</p>
@@ -60,7 +70,7 @@
     </div>
 
     <div class="card" onclick="startQuiz('zense')">
-        <img src="1774787085699.png" alt="前世" class="card-img">
+        <img src="1774787133599.png" alt="前世" class="card-img">
         <div class="info">
             <h2>前世タイプ診断</h2>
             <p>10の質問で魂の記憶を呼び覚まします。</p>
@@ -68,7 +78,7 @@
     </div>
 
     <div class="card" onclick="startQuiz('tsun')">
-        <img src="1774787133599.png" alt="ツンデレ" class="card-img">
+        <img src="1774787085699.png" alt="ツンデレ" class="card-img">
         <div class="info">
             <h2>ツンデレ比率診断</h2>
             <p>隠れた本心をAIが精密に可視化。</p>
@@ -98,7 +108,7 @@
 <script>
 const db = {
     love: {
-        qs: ["自分から話しかけるのは得意だ","人の変化（髪型など）にすぐ気づく","多趣味な方だ","SNSの返信は早い方だ","聞き上手だと言われる","ファッションにはこだわりがある","笑顔を褒められることが多い","一人の時間も楽しめる","サプライズが好きだ","今の自分が好きだ"],
+        qs: ["自分から話しかけるのは得意だ？","人の変化（髪型など）にすぐ気づく？","多趣味な方だ？","SNSの返信は早い方だ？","聞き上手だと言われる？","ファッションにはこだわりがある？","笑顔を褒められることが多い？","一人の時間も楽しめる？","サプライズが好きだ？","今の自分が好きだ？"],
         results: [
             { n: "【推定3人】じっくり愛される派", d: "あなたは派手にモテるタイプではありませんが、一度好きになった人に深く愛される才能があります。誠実さが最大の武器です。" },
             { n: "【推定15人】かなりのモテ素質あり", d: "あなたは周囲を明るくする魅力を持っています。無自覚に振りまく愛嬌で、多くの人を惹きつけるでしょう。モテ期はすぐそこです。" },
