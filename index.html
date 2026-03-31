@@ -9,7 +9,7 @@
         :root { --main: #007aff; --bg: #f2f2f7; }
         body { margin: 0; padding: 0; background: var(--bg); font-family: -apple-system, sans-serif; }
 
-        /* 利用規約のオーバーレイ（縦長長方形に修正） */
+        /* 利用規約のオーバーレイ（縦長長方形） */
         #terms-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85);
@@ -34,8 +34,25 @@
             border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
         }
 
+        /* ★復活：Diag.Labロゴ周りの青色背景 */
         header { background: #002b5c; color: #fff; padding: 20px; text-align: center; }
         .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; }
+
+        /* ★復活：紹介文（intro-box）のスタイル */
+        .intro-box {
+            background: #fff;
+            padding: 20px;
+            margin: 16px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .intro-text {
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+        }
 
         .container { padding: 16px; max-width: 500px; margin: 0 auto; }
 
@@ -50,7 +67,7 @@
         .info h1 { margin: 0; font-size: 0.95rem; font-weight: bold; }
         .info p { margin: 4px 0 0; font-size: 0.75rem; color: #8e8e93; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 
-        /* 診断・結果画面（被り防止のため上詰めに修正） */
+        /* 診断・結果画面（上詰めに配置） */
         #quiz-ui, #result-ui { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; flex-direction: column; align-items: center; z-index: 999; padding: 60px 20px; box-sizing: border-box; }
         .progress { color: var(--main); font-weight: bold; margin-bottom: 20px; }
         .q-text { font-size: 1.4rem; font-weight: 800; text-align: center; margin-bottom: 40px; }
@@ -80,6 +97,13 @@
     </div>
 
     <header><div class="logo">Diag.Lab</div></header>
+
+    <div class="intro-box">
+        <p class="intro-text">
+            国内最大級の精密診断サイトを目指すDiag.Lab（ダイアグラボ）へようこそ。<br>
+            いろいろな質問で、あなたの未来やルーツを詳細に分析します。
+        </p>
+    </div>
 
     <div class="container">
         <article class="card" onclick="startQuiz('love')">
