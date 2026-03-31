@@ -8,28 +8,42 @@
         :root { --main: #007aff; --header-bg: #002b5c; --bg: #f2f2f7; }
         body { margin: 0; padding: 0; background: var(--bg); font-family: -apple-system, sans-serif; color: #333; }
 
-        /* 利用規約ポップアップ */
+        /* 利用規約ポップアップ（サイズを大きく修正） */
         #terms-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center;
             z-index: 10000; padding: 20px; box-sizing: border-box;
         }
         .terms-card {
-            background: #fff; width: 100%; max-width: 350px; 
-            border-radius: 20px; padding: 25px; text-align: center;
+            background: #fff; width: 100%; max-width: 450px; /* 横幅を拡大 */
+            max-height: 85vh; /* 縦幅も画面に合わせる */
+            border-radius: 24px; padding: 30px; text-align: center;
+            display: flex; flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         .terms-box {
-            text-align: left; font-size: 0.85rem; color: #666; 
-            background: #f8f9fa; padding: 15px; border-radius: 12px;
-            margin: 15px 0; max-height: 200px; overflow-y: auto; line-height: 1.6;
+            text-align: left; font-size: 0.85rem; color: #555; 
+            background: #f8f9fa; padding: 20px; border-radius: 12px;
+            margin: 20px 0; overflow-y: auto; line-height: 1.8;
+            border: 1px solid #eee;
         }
+        .terms-box h3 { font-size: 1rem; color: #333; margin: 15px 0 5px; }
         .agree-btn {
             background: var(--main); color: #fff; border: none; width: 100%;
-            padding: 16px; border-radius: 30px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            padding: 18px; border-radius: 35px; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            transition: 0.2s;
         }
+        .agree-btn:active { transform: scale(0.98); opacity: 0.9; }
 
         header { background: var(--header-bg); color: #fff; padding: 20px; text-align: center; }
         .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; }
+
+        .counter-area {
+            text-align: center; padding: 10px; background: #eef2f7;
+            font-size: 0.85rem; color: #555; border-bottom: 1px solid #ddd;
+        }
+        .counter-area span { font-weight: bold; color: var(--main); font-size: 1rem; }
+
         .intro-box {
             background: #fff; padding: 20px; margin: 16px;
             border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); text-align: center;
@@ -60,12 +74,10 @@
         .btn-yes { background: var(--main); color: #fff; }
         .btn-no { background: #e5e5ea; color: #000; }
         
-        /* 結果表示 */
         .res-label { font-size: 0.9rem; color: #888; margin-bottom: 10px; }
         .res-name { font-size: 1.8rem; font-weight: 900; color: var(--main); margin-bottom: 20px; text-align: center; }
         .res-desc { background: #f8f9fa; padding: 20px; border-radius: 12px; line-height: 1.6; margin-bottom: 20px; width: 100%; max-width: 400px; }
 
-        /* 復活：シェアボタンのスタイル */
         .share-btn {
             background: #000; color: #fff; border: none; width: 100%; max-width: 300px;
             padding: 14px; border-radius: 30px; font-size: 1rem; font-weight: bold; cursor: pointer;
@@ -77,19 +89,35 @@
 
     <div id="terms-overlay">
         <div class="terms-card">
-            <h2 style="color:var(--main); margin-top:0; font-size: 1.3rem;">本サイトをご利用するにあたって</h2>
+            <h2 style="color:var(--main); margin-top:0; font-size: 1.4rem;">本サイトをご利用するにあたって</h2>
             <div class="terms-box">
-                【利用規約】<br>
-                ・診断結果に医学的根拠はありません。<br>
-                ・損害について運営は責任を負いません。<br><br>
-                【プライバシー】<br>
-                ・回答データは保存されません。
+                <h3>第1条（規約の適用）</h3>
+                本規約は、Diag.Lab（以下「当サイト」）が提供する全ての診断コンテンツ（以下「本サービス」）の利用条件を定めるものです。利用者の皆様は、本規約に同意した上で本サービスを利用するものとします。
+                
+                <h3>第2条（サービスの性質）</h3>
+                本サービスで提供される診断結果は、入力された回答に基づく統計的、またはエンターテインメント目的の推測であり、医学的、心理学的、科学的根拠を保証するものではありません。結果はあくまで参考としてお楽しみください。
+
+                <h3>第3条（禁止事項）</h3>
+                利用者は、以下の行為を行ってはならないものとします。
+                ・当サイトの運営を妨げる行為
+                ・サーバーまたはネットワークに過度な負荷をかける行為
+                ・他の利用者への誹謗中傷、または不利益を与える行為
+                
+                <h3>第4条（免責事項）</h3>
+                当サイトは、本サービスに起因して利用者に生じたあらゆる損害（精神的苦痛、金銭的損失、人間関係のトラブル等）について、一切の責任を負いません。自己責任においてご利用ください。
+
+                <h3>第5条（プライバシーポリシー）</h3>
+                本サービスで入力された回答データは、ブラウザを閉じた時点で破棄され、サーバー上に永続的に保存されることはありません。個人を特定する情報の取得も行いません。
             </div>
-            <button class="agree-btn" onclick="agreeTerms()">同意して診断をはじめる</button>
+            <button class="agree-btn" onclick="agreeTerms()">内容に同意して開始</button>
         </div>
     </div>
 
     <header><div class="logo">Diag.Lab</div></header>
+
+    <div class="counter-area">
+        累計診断数：<span id="visit-count">0</span> 回
+    </div>
 
     <div class="intro-box">
         <p class="intro-text">
@@ -144,6 +172,11 @@
     <script>
         function agreeTerms() { document.getElementById('terms-overlay').style.display = 'none'; }
 
+        let count = localStorage.getItem('diag_count') || 1240;
+        count = parseInt(count) + 1;
+        localStorage.setItem('diag_count', count);
+        document.getElementById('visit-count').innerText = count.toLocaleString();
+
         const db = {
             love: { title: "一生で何人に告白されるか診断", qs: ["自分から話しかけるのは得意？", "人の変化にすぐ気づく？", "多趣味なほうだ？", "聞き上手だと言われる？", "一人より誰かといたい？", "初対面でも緊張しない？", "連絡はマメに返す？", "身だしなみには気を使う？", "ポジティブな方だ？", "約束は必ず守る？"], results: [{ n: "【推定3人】じっくり愛される派", d: "誠実な魅力で、特定の人から深く愛されるタイプです。" }, { n: "【推定15人】かなりのモテ素質", d: "自然体で周囲を明るくする力があります。実は狙っている人が多いかも。" }, { n: "【推定50人以上】伝説のモテ体質", d: "圧倒的なカリスマ性。一生告白が絶えないでしょう。" }] },
             zense: { title: "前世タイプ診断", qs: ["冒険好き？", "直感を信じる？", "歴史に興味がある？", "自由でいたい？", "冷静な方？", "一人が好き？", "自然が好き？", "表現することが好き？", "正義感が強い？", "海より山派？"], results: [{ n: "平安貴族", d: "雅な感性を持つあなた。前世では静かに和歌を詠んでいたようです。" }, { n: "戦国武将", d: "強い意志の持ち主。前世では多くの仲間を率いて戦っていました。" }, { n: "異国の旅人", d: "自由な魂。前世では国境を越え、未知の景色を求めていました。" }] },
@@ -164,13 +197,12 @@
             document.getElementById('res-desc').innerText = result.d;
         }
 
-        // 復活：シェア機能
         function shareX() {
             const resultName = document.getElementById('res-name').innerText;
             const quizTitle = db[mode].title;
-            const text = `${quizTitle}の結果は…\n${resultName}でした！\n\n#DiagLab #診断`;
-            const url = encodeURIComponent(window.location.href);
-            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${url}`, '_blank');
+            const siteUrl = window.location.href;
+            const text = `${quizTitle}の結果は…\n${resultName}でした！\n\n診断はこちらから↓\n${siteUrl}\n\n#DiagLab #診断`;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
         }
     </script>
 </body>
